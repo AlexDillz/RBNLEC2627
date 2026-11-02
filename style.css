@@ -89,7 +89,7 @@ a.btn:visited {
   color: inherit; 
 }
 
-/* тёмная тема - тёмная кнопка */
+/* темная тема - темная кнопка */
 body.dark .btn-secondary {
   background:#111827;
   color:#f9fafb;
@@ -121,7 +121,7 @@ body.dark .btn-secondary {
 /* светлая тема - кнопка "Скачать" светлая */
 body:not(.dark) .btn.btn-download {
   background:#ffffff;      /* светлый фон */
-  color:#111827;           /* тёмный текст */
+  color:#111827;           /* темный текст */
   border-color:#e5e7eb;    /* мягкая рамка */
 }
 
@@ -187,7 +187,7 @@ footer{
   line-height: 1.6;
 }
 
-/* тёмная тема */
+/* темная тема */
 body.dark{
   background:#111;
   color:#f3f4f6;
@@ -457,7 +457,7 @@ body.dark .person-toggle{
   margin-top: 32px;
 }
 
-/* адаптация под тёмную тему */
+/* адаптация под темную тему */
 body.dark .person-status{
   border-color: #4b5563;
 }
@@ -543,7 +543,7 @@ body.dark .person-status--soon{
   text-decoration: none;
 
   background: #ffffff;      /* светлый фон */
-  color: #111827;           /* тёмный текст */
+  color: #111827;           /* темный текст */
   border: 1px solid #e5e7eb;
 
   transition: background .2s, color .2s, border-color .2s;
@@ -554,7 +554,7 @@ body.dark .person-status--soon{
   background: #e5e7eb;
 }
 
-/* тёмная тема */
+/* темная тема */
 body.dark .person-lecture-btn {
   background: #1f2937;
   color: #f9fafb;
@@ -623,7 +623,7 @@ body.dark .contact-card{
 
 body.dark .contact-card a,
 body.dark .contact-card a:visited{
-  color:#7dd3fc; /* тёмная тема: читаемо */
+  color:#7dd3fc; /* темная тема: читаемо */
 }
 
 body.dark .contact-card a:hover{
@@ -651,7 +651,7 @@ body.dark .contact-card a:hover{
 .badge.tg{ background:#229ED9; }
 .badge.vk{ background:#0077FF; }
 
-/* muted на тёмной теме - чуть светлее */
+/* muted на темной теме - чуть светлее */
 body.dark .muted{
   color:#9ca3af;
 }
