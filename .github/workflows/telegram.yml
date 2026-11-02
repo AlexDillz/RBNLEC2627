@@ -1,0 +1,40 @@
+name: Telegram
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - lectures.json
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Previous lectures.json
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
+            || ! git cat-file -e "$BEFORE:lectures.json" 2>/dev/null; then
+            echo '{"lectures": []}' > "$RUNNER_TEMP/old.json"
+          else
+            git show "$BEFORE:lectures.json" > "$RUNNER_TEMP/old.json"
+          fi
+
+      - name: Send posts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://alexdillz.github.io/RBNLEC2627/' }}
+        run: node .github/scripts/notify-telegram.js "$RUNNER_TEMP/old.json" lectures.json
