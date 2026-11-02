@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Первая лекция</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+      if (params.get('from') === 'personas') {
+        const close = document.querySelector('.close-card-btn');
+        const back = document.querySelector('.lecture-footer .btn');
+        if (close) close.href = 'personas.html';
+        if (back) {
+          back.href = 'personas.html';
+          back.textContent = '← Назад';
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <button id="theme-toggle" aria-label="Переключить тему">🌙 Темная тема</button>
+
+  <article class="card lecture-card">
+    <a class="close-card-btn" href="../index.html" aria-label="Назад к списку">
+      <svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </a>
+
+    <div class="content">
+      <h1>Первая лекция</h1>
+      <p>Тут будет информация о первой лекции.</p>
+
+      <div class="lecture-footer">
+        <a class="btn" href="../index.html">← Назад к лекциям</a>
+      </div>
+    </div>
+  </article>
+
+  <script src="../protect-local.js?v=7" data-lecture-id="first-lec"></script>
+</body>
+</html>

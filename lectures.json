@@ -1,3 +1,11 @@
 {
-  "lectures": []
+  "lectures": [
+    {
+      "id": "first-lec",
+      "title": "Первая лекция",
+      "summary": "Тут будет информация о первой лекции",
+      "url": "lectures/first-lec.html",
+      "locked": true
+    }
+  ]
 }
