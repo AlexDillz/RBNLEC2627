@@ -1,13 +1,3 @@
-/* 
-Привет, ковёрный взломщик 👋  
-Если ты читаешь это - значит, нашёл путь быстрее всех.
-
-Напиши Парфенюку Виктору в личные сообщения фразу:
-"Код открыт — а сердце ещё нет"
-
-За это ты получишь бонус 😎
-*/
-
 :root { 
   --pad:16px; 
   --border:#e5e7eb; 
@@ -99,7 +89,7 @@ a.btn:visited {
   color: inherit; 
 }
 
-/* тёмная тема — тёмная кнопка */
+/* тёмная тема - тёмная кнопка */
 body.dark .btn-secondary {
   background:#111827;
   color:#f9fafb;
@@ -121,14 +111,14 @@ body.dark .btn-secondary {
   flex-shrink:0;
 }
 
-/* кнопка скачивания — чуть более акцентная */
+/* кнопка скачивания - чуть более акцентная */
 .btn.btn-download{
   background:#111827;
   color:#f9fafb;
   border-color:#111827;
 }
 
-/* светлая тема — кнопка "Скачать" светлая */
+/* светлая тема - кнопка "Скачать" светлая */
 body:not(.dark) .btn.btn-download {
   background:#ffffff;      /* светлый фон */
   color:#111827;           /* тёмный текст */
@@ -280,7 +270,7 @@ body.dark .card-locked{
   padding-top:32px;     /* внутри карточки крестик+заголовок */
 }
 
-/* когда карточка висит прямо в body — тот же отступ */
+/* когда карточка висит прямо в body - тот же отступ */
 body > .lecture-card{
   margin-top:56px;
 }
@@ -406,7 +396,7 @@ body.dark .content .person-photo{
   flex-direction: column;
 }
 
-/* кнопка раскрытия информации о лекторе — единый стиль */
+/* кнопка раскрытия информации о лекторе - единый стиль */
 .person-toggle{
   align-self: flex-start;
   margin-top: 4px;
@@ -617,7 +607,7 @@ body.dark .contact-card{
   text-align:left;   /* убираем justify как в .content p */
 }
 
-/* Ссылки — контрастно в обеих темах + фикс :visited */
+/* Ссылки - контрастно в обеих темах + фикс :visited */
 .contact-card a,
 .contact-card a:visited{
   color:#2563eb; /* светлая тема */
@@ -661,7 +651,7 @@ body.dark .contact-card a:hover{
 .badge.tg{ background:#229ED9; }
 .badge.vk{ background:#0077FF; }
 
-/* muted на тёмной теме — чуть светлее */
+/* muted на тёмной теме - чуть светлее */
 body.dark .muted{
   color:#9ca3af;
 }
@@ -677,60 +667,6 @@ body.contacts-page .close-card-btn{
   right: auto;
 }
 
-/* Исследователи — прогресс */
-
-.progress-wrapper{
-  margin-top: 10px;
-}
-
-.progress-bar{
-  width: 100%;
-  height: 8px;
-  border-radius: 9999px;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-
-.progress-fill{
-  height: 100%;
-  width: 0%;
-  background: #111827;
-  transition: width .3s ease;
-}
-
-body.dark .progress-bar{
-  background: #374151;
-}
-
-body.dark .progress-fill{
-  background: #f9fafb;
-}
-
-
 .lecture-card{
   position: relative; 
-}
-
-.easter-square{
-  position: absolute;
-
-  width: 40px;
-  height: 40px;
-
-  top: 16px;
-  right: 16px;
-
-  opacity: 0;
-  z-index: 20;
-
-  cursor: default;
-}
-
-.easter-square:hover{
-  opacity: 0.04;
-  cursor: pointer;
-}
-
-body.dark .easter-square:hover{
-  opacity: 0.07;
 }

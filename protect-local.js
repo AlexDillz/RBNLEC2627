@@ -8,7 +8,7 @@
       const s = localStorage.getItem('theme');
       if (s === 'dark' || s === 'light') return s;
     } catch (_) {
-      // localStorage может быть недоступен — просто игнорируем
+      // localStorage может быть недоступен - просто игнорируем
     }
 
     if (
@@ -36,8 +36,8 @@
   const btnText   = isDark ? '#111827' : '#f9fafb';
 
   // проверка локального запуска
-  // file://  — открыли HTML двойным кликом
-  // localhost / 127.0.0.1 / ::1 — локальный сервер (python -m http.server)
+  // file://  - открыли HTML двойным кликом
+  // localhost / 127.0.0.1 / ::1 - локальный сервер (python -m http.server)
   const isLocal =
     location.protocol === 'file:' ||
     location.hostname === 'localhost' ||
@@ -121,7 +121,7 @@
   }
 
   if (DEV_MODE) {
-    console.warn('⚠ protect-local.js: DEV_MODE включён — защита отключена');
+    console.warn('⚠ protect-local.js: DEV_MODE включён - защита отключена');
     return;
   }
 

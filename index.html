@@ -1,14 +1,4 @@
 <!-- index.html -->
-<!--
-Привет, ковёрный взломщик 👋
-Если ты читаешь это - значит, нашёл путь быстрее всех.
-
-Напиши Парфенюку Виктору в личные сообщения фразу:
-"Код открыт — а сердце ещё нет"
-
-За это ты получишь бонус 😎
--->
-
 <!doctype html>
 <html lang="ru">
 <head>
@@ -29,15 +19,6 @@
         👥 Команда и лекторы</a>
       <a class="btn btn-secondary" href="contacts.html">
         📬 Наши контакты</a>
-      <a class="btn btn-secondary" href="researchers.html">
-        🧭 Исследователи</a>
-      <a
-        class="btn btn-secondary"
-        href="exam-tickets.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📝 Экзаменационные билеты</a>
     </div>
   </header>
 
@@ -45,7 +26,7 @@
 
   <main id="list" class="grid"></main>
 
-  <footer><small>v61.2026 © PARFENUCHKA, 2025-2026</small></footer>
+  <footer><small>v62.2027 © PARFENUCHKA, 2026-2027</small></footer>
 
   <script>
     async function load() {
@@ -55,7 +36,13 @@
         const root = document.getElementById('list');
         root.innerHTML = '';
 
-        data.lectures.forEach(L => {
+        const lectures = Array.isArray(data.lectures) ? data.lectures : [];
+        if (lectures.length === 0) {
+          root.innerHTML = '<p class="muted">Лекции скоро появятся. Загляните сюда чуть позже 🙂</p>';
+          return;
+        }
+
+        lectures.forEach(L => {
           const el = document.createElement('article');
 
           // залоченная карточка

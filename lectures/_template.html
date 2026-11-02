@@ -1,0 +1,94 @@
+<!--
+  ШАБЛОН СТРАНИЦЫ ЛЕКЦИИ
+
+  Как пользоваться:
+  1. Скопируй этот файл и назови его по id лекции, например: lectures/vvod-lec.html
+  2. Замени все места с пометкой ЗАМЕНИ:
+     - НАЗВАНИЕ ЛЕКЦИИ в <title> и в <h1>;
+     - контент внутри блока <div class="content">;
+     - LECTURE_ID в самом низу (атрибут data-lecture-id).
+       Он должен совпадать с полем "id" записи в lectures.json.
+  3. Добавь запись о лекции в lectures.json (см. README.md).
+  4. Этот комментарий в готовой лекции можно удалить.
+
+  Файлы, которые начинаются с "_", на сайте нигде не показываются:
+  шаблон лежит здесь только для копирования.
+-->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <!-- ЗАМЕНИ: название лекции (видно во вкладке браузера) -->
+  <title>НАЗВАНИЕ ЛЕКЦИИ</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js" defer></script>
+
+  <!-- кнопки "назад": ведут на главную или на страницу "Команда и лекторы" (если пришли оттуда с ?from=personas) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const from = params.get('from');
+
+      let targetHref = '../index.html';
+      let backText   = '← Назад к лекциям';
+
+      if (from === 'personas') {
+        targetHref = 'personas.html';
+        backText   = '← Назад';
+      }
+
+      const closeBtn = document.querySelector('.close-card-btn');
+      const backBtn  = document.querySelector('.lecture-footer .btn');
+
+      if (closeBtn) {
+        closeBtn.href = targetHref;
+      }
+      if (backBtn) {
+        backBtn.href = targetHref;
+        backBtn.textContent = backText;
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <!-- переключатель темы -->
+  <button id="theme-toggle" aria-label="Переключить тему">🌙 Тёмная тема</button>
+
+  <!-- карточка лекции с крестиком -->
+  <article class="card lecture-card">
+    <a class="close-card-btn" href="../index.html" aria-label="Назад к списку">
+      <svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </a>
+
+    <div class="content">
+      <!-- ЗАМЕНИ: название лекции -->
+      <h1>НАЗВАНИЕ ЛЕКЦИИ</h1>
+
+      <!--
+        ЗАМЕНИ: контент лекции. Сюда идёт всё, что увидит участник:
+        - текст: <h2>Раздел</h2>, <p>Абзац</p>, списки <ul><li>...</li></ul>;
+        - картинки: <img src="../assets/lecs/LECTURE_ID/picture.jpg" alt="Описание">;
+        - ссылка на материалы (pptx, pdf):
+          <a class="btn btn-download" href="../assets/lecs/LECTURE_ID/slides.pdf" download>Скачать презентацию</a>
+      -->
+      <h2>Подзаголовок</h2>
+      <p>Текст лекции.</p>
+
+      <div class="lecture-footer">
+        <a class="btn" href="../index.html">← Назад к лекциям</a>
+      </div>
+    </div>
+  </article>
+
+  <!--
+    защита от локального просмотра и от открытия закрытых (locked) лекций.
+    ЗАМЕНИ: LECTURE_ID на id лекции из lectures.json
+  -->
+  <script src="../protect-local.js?v=7" data-lecture-id="LECTURE_ID"></script>
+</body>
+</html>
