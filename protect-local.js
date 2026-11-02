@@ -156,7 +156,7 @@
   }
 
   try {
-    const r = await fetch('../lectures.json', { cache: 'no-store' });
+    const r = await fetch('../lectures.json?v=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
 
     const data = await r.json();
