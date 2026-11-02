@@ -1,0 +1,736 @@
+/* 
+Привет, ковёрный взломщик 👋  
+Если ты читаешь это - значит, нашёл путь быстрее всех.
+
+Напиши Парфенюку Виктору в личные сообщения фразу:
+"Код открыт — а сердце ещё нет"
+
+За это ты получишь бонус 😎
+*/
+
+:root { 
+  --pad:16px; 
+  --border:#e5e7eb; 
+}
+
+*{
+  box-sizing:border-box;
+}
+
+/* базовая раскладка страницы */
+body{
+  font-family:system-ui,Arial,sans-serif;
+  max-width:900px;
+  margin:0 auto;
+  padding:var(--pad);
+  line-height:1.55;
+  color:#111;
+  background:#fff;
+}
+
+/* шапка (главная страница) */
+header{
+  margin:48px 0 20px; /* чуть выше, чтобы не конфликтовать с кнопкой темы */
+}
+
+h1{
+  margin:0 0 6px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
+
+/* карточки лекций на главной: ровная высота и кнопка внизу */
+#list > .card{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+#list > .card .btn{
+  width:100%;
+  justify-content:center;
+  margin-top:auto;
+}
+
+#list > .card .locked-footer{
+  margin-top:auto;
+}
+
+/* блок с кнопкой "Команда и лекторы" в шапке */
+.header-actions{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* карточки списка лекций */
+.card{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  background:#fff; 
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:18px;
+}
+.card p{
+  margin:0 0 12px; 
+  color:#111;
+}
+
+/* кнопка */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  text-decoration:none;
+}
+a.btn:link, 
+a.btn:visited { 
+  color: inherit; 
+}
+
+/* тёмная тема — тёмная кнопка */
+body.dark .btn-secondary {
+  background:#111827;
+  color:#f9fafb;
+  border-color:transparent;
+}
+
+
+/* нижняя панель с кнопками в лекции */
+.lecture-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+}
+
+/* чтобы кнопки не растягивались / не схлопывались */
+.lecture-footer .btn{
+  flex-shrink:0;
+}
+
+/* кнопка скачивания — чуть более акцентная */
+.btn.btn-download{
+  background:#111827;
+  color:#f9fafb;
+  border-color:#111827;
+}
+
+/* светлая тема — кнопка "Скачать" светлая */
+body:not(.dark) .btn.btn-download {
+  background:#ffffff;      /* светлый фон */
+  color:#111827;           /* тёмный текст */
+  border-color:#e5e7eb;    /* мягкая рамка */
+}
+
+
+body.dark .btn.btn-download{
+  background:#f9fafb;
+  color:#111827;
+  border-color:#f9fafb;
+}
+
+footer{
+  margin-top:24px;
+  color:#6b7280;
+}
+
+/* плавающая кнопка темы (десктоп) */
+#theme-toggle{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* стили контента лекции */
+.content p{
+  text-align: justify;
+  text-indent: 25px;
+  margin: 0 0 12px;
+}
+.content h1, 
+.content h2, 
+.content h3, 
+.content h4, 
+.content h5{
+  text-align: center;
+  text-indent: 0;
+  margin: 16px 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.content ol, 
+.content ul{ 
+  margin: 0 0 12px 22px; 
+}
+.content img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:16px auto;
+  border-radius:8px;
+}
+.content li {
+  text-align: justify;   
+  text-indent: 0;        
+  margin: 0 0 8px;       
+  line-height: 1.6;
+}
+
+/* тёмная тема */
+body.dark{
+  background:#111;
+  color:#f3f4f6;
+}
+body.dark .card{
+  background:#1f2937;
+  border-color:#374151;
+}
+body.dark .card p{ 
+  color:#e5e7eb; 
+}
+body.dark a.btn{ 
+  border-color:#4b5563; 
+  color:#f3f4f6; 
+}
+body.dark footer{ 
+  color:#9ca3af; 
+}
+body.dark #theme-toggle{
+  background: #111;
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+
+/* открытая карточка (на главной) */
+.card-clickable{
+  cursor:pointer;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.card-clickable:hover{
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+  transform:translateY(-1px);
+}
+
+/* заблокированная карточка (на главной) */
+.card-locked{
+  position:relative;
+  opacity:0.9;
+  overflow:hidden;
+}
+.card-locked .locked-body{
+  filter:blur(3px);
+  pointer-events:none;
+  user-select:none;
+}
+.card-locked::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.9)
+  );
+  pointer-events:none;
+}
+.card-locked .locked-footer{
+  position:relative;
+  margin-top:12px;
+}
+.locked-btn[disabled]{
+  cursor:default;
+  background:#f3f4f6;
+  color:#6b7280;
+  border-color:#e5e7eb;
+}
+body.dark .locked-btn[disabled]{
+  background:#1f2937;
+  color:#9ca3af;
+  border-color:#374151;
+}
+body.dark .card-locked{
+  background:#111827;
+}
+
+/* карточка лекции целиком (и лекции, и personas) */
+.lecture-card{
+  margin-top:56px;      /* стабильный отступ сверху под кнопку темы */
+  position:relative;
+  padding-top:32px;     /* внутри карточки крестик+заголовок */
+}
+
+/* когда карточка висит прямо в body — тот же отступ */
+body > .lecture-card{
+  margin-top:56px;
+}
+
+/* кнопка закрытия карточки лекции (кружочек с крестиком) */
+.close-card-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 9999px;
+  background: #fff;
+  color: #111;
+  border: 1px solid var(--border);
+  text-decoration: none;
+
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+/* сам крестик в виде svg */
+.close-card-btn .close-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.close-card-btn:hover {
+  background: #f3f4f6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0,0,0,.15);
+}
+
+body.dark .close-card-btn {
+  background:#111827;
+  color:#f3f4f6;
+  border-color:#374151;
+}
+body.dark .close-card-btn:hover {
+  background:#020617;
+}
+
+/* для страниц замка / локального режима */
+body.dark {
+  --locked-bg: #111827;
+  --locked-text: #f3f4f6;
+}
+
+/* карточки лекторов */
+
+.person-grid{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.person-card{
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.content .person-photo{
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
+  max-width: none;
+  margin: 0;
+  display: block;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  border: 2px solid rgba(148,163,184,0.22);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+  aspect-ratio: 1 / 1;
+  object-position: center 20%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+body.dark .content .person-photo{
+  background: #334155;
+  border-color: #475569;
+}
+
+.person-main{
+  flex: 1;
+}
+
+.person-header-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.person-name{
+  margin: 0;
+  font-size: 18px;
+}
+
+.person-role{
+  margin: 2px 0 4px; 
+}
+
+/* фикс вертикального ритма в карточке */
+.person-main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* кнопка раскрытия информации о лекторе — единый стиль */
+.person-toggle{
+  align-self: flex-start;
+  margin-top: 4px;
+
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+
+  background: transparent;   /* фон совпадает с карточкой */
+  color: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+
+  cursor: pointer;
+}
+
+body.dark .person-toggle{
+  background: transparent;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+/* статусные бейджики */
+.person-status{
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  line-height: 1.4;
+  border: 1px solid var(--border);
+}
+
+.person-status--done{
+  background: rgba(34,197,94,0.08);
+}
+
+.person-status--soon{
+  background: rgba(234,179,8,0.08);
+}
+
+/* разворачиваемый блок с текстом */
+.person-extra{
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .25s ease, opacity .25s ease, margin-top .25s ease;
+}
+
+.person-card--open .person-extra{
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 8px;
+}
+
+/* выравнивание кнопки "на главную" внизу */
+.person-footer-actions{
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 32px;
+}
+
+/* адаптация под тёмную тему */
+body.dark .person-status{
+  border-color: #4b5563;
+}
+body.dark .person-status--done{
+  background: rgba(34,197,94,0.15);
+}
+body.dark .person-status--soon{
+  background: rgba(234,179,8,0.15);
+}
+
+/* мобилка */
+@media (max-width: 640px){
+  /* кнопку темы уводим вниз */
+  #theme-toggle{
+    top: auto;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: auto;
+    padding: 12px 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  }
+
+  /* запас снизу под кнопку темы */
+  body{
+    padding-bottom: 72px;
+  }
+
+  /* шапка ближе к верху, без гигантской полосы на главной */
+  header{
+    margin: 32px 0 16px;
+  }
+
+  /* карточка лекции / personas: ближе к верху на мобилке */
+  body > .lecture-card{
+    margin-top:16px;
+  }
+
+  .lecture-card{
+    padding-top:32px;
+  }
+
+  /* крестик внутри карточки, сверху чуть отступ */
+  .close-card-btn{
+    top: 10px;
+    right: 10px;
+  }
+
+  /* нижние кнопки в лекции - в столбик */
+  .lecture-footer{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .lecture-footer .btn{
+    justify-content:center;
+    width:100%;
+  }
+
+  .person-card{
+    align-items: flex-start;
+  }
+  .person-footer-actions{
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* чтобы текст в карточках людей был без абзацного отступа и выровнен влево */
+.person-card p{
+  text-indent: 0;
+  text-align: left;
+}
+
+/* кнопка для перехода к лекции внутри карточки */
+.person-lecture-btn {
+  display: inline-block;
+  align-self: flex-start;
+
+  padding: 6px 14px;
+  border-radius: 9999px;
+
+  font-size: 15px;
+  line-height: 1.4;
+  text-decoration: none;
+
+  background: #ffffff;      /* светлый фон */
+  color: #111827;           /* тёмный текст */
+  border: 1px solid #e5e7eb;
+
+  transition: background .2s, color .2s, border-color .2s;
+  margin-top: 6px;
+}
+
+.person-lecture-btn:hover {
+  background: #e5e7eb;
+}
+
+/* тёмная тема */
+body.dark .person-lecture-btn {
+  background: #1f2937;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark .person-lecture-btn:hover {
+  background: #374151;
+}
+
+
+/* фикс: кнопка темы не перекрывает крестик на contacts.html */
+body.contacts-page .close-card-btn{
+  top: 18px;
+  right: 110px; /* место под #theme-toggle справа */
+  z-index: 60;
+}
+body.contacts-page #theme-toggle{
+  z-index: 50;
+}
+
+.contacts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+  margin:20px 0;
+}
+
+.contact-card{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+}
+
+body.dark .contact-card{
+  background:#1f2937;
+  border-color:#374151;
+}
+
+.contact-card h3{
+  margin:0 0 10px;
+  font-size:18px;
+  text-align:center;
+}
+
+.contact-card p{
+  margin:8px 0;
+  text-indent:0;     /* убираем «лекционный» абзацный отступ */
+  text-align:left;   /* убираем justify как в .content p */
+}
+
+/* Ссылки — контрастно в обеих темах + фикс :visited */
+.contact-card a,
+.contact-card a:visited{
+  color:#2563eb; /* светлая тема */
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-thickness:1.5px;
+  font-weight:600;
+}
+
+.contact-card a:hover{
+  color:#1d4ed8;
+}
+
+body.dark .contact-card a,
+body.dark .contact-card a:visited{
+  color:#7dd3fc; /* тёмная тема: читаемо */
+}
+
+body.dark .contact-card a:hover{
+  color:#bae6fd;
+}
+
+/* Бейджи TG/VK */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:28px;
+  height:18px;
+  padding:0 6px;
+  margin-right:8px;
+
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:0.02em;
+
+  border-radius:6px;
+  color:#fff;
+}
+
+.badge.tg{ background:#229ED9; }
+.badge.vk{ background:#0077FF; }
+
+/* muted на тёмной теме — чуть светлее */
+body.dark .muted{
+  color:#9ca3af;
+}
+/* contacts: крестик привязываем к карточке, а не к окну */
+body.contacts-page .card{
+  position: relative;
+}
+
+body.contacts-page .close-card-btn{
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: auto;
+}
+
+/* Исследователи — прогресс */
+
+.progress-wrapper{
+  margin-top: 10px;
+}
+
+.progress-bar{
+  width: 100%;
+  height: 8px;
+  border-radius: 9999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.progress-fill{
+  height: 100%;
+  width: 0%;
+  background: #111827;
+  transition: width .3s ease;
+}
+
+body.dark .progress-bar{
+  background: #374151;
+}
+
+body.dark .progress-fill{
+  background: #f9fafb;
+}
+
+
+.lecture-card{
+  position: relative; 
+}
+
+.easter-square{
+  position: absolute;
+
+  width: 40px;
+  height: 40px;
+
+  top: 16px;
+  right: 16px;
+
+  opacity: 0;
+  z-index: 20;
+
+  cursor: default;
+}
+
+.easter-square:hover{
+  opacity: 0.04;
+  cursor: pointer;
+}
+
+body.dark .easter-square:hover{
+  opacity: 0.07;
+}

@@ -1,0 +1,108 @@
+<!-- index.html -->
+<!--
+Привет, ковёрный взломщик 👋
+Если ты читаешь это - значит, нашёл путь быстрее всех.
+
+Напиши Парфенюку Виктору в личные сообщения фразу:
+"Код открыт — а сердце ещё нет"
+
+За это ты получишь бонус 😎
+-->
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Школа Вожатского Мастерства ОЛАС «РУБИН»</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Школа Вожатского Мастерства ОЛАС «РУБИН»</h1>
+    <p>
+      Горячий привет всем, кто добрался сюда. Здесь можно ознакомиться с материалами лекций и не только.
+    </p>
+
+    <div class="header-actions">
+      <a class="btn btn-secondary" href="lectures/personas.html">
+        👥 Команда и лекторы</a>
+      <a class="btn btn-secondary" href="contacts.html">
+        📬 Наши контакты</a>
+      <a class="btn btn-secondary" href="researchers.html">
+        🧭 Исследователи</a>
+      <a
+        class="btn btn-secondary"
+        href="exam-tickets.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📝 Экзаменационные билеты</a>
+    </div>
+  </header>
+
+  <button id="theme-toggle" aria-label="Переключить тему">🌙 Тёмная тема</button>
+
+  <main id="list" class="grid"></main>
+
+  <footer><small>v61.2026 © PARFENUCHKA, 2025-2026</small></footer>
+
+  <script>
+    async function load() {
+      try {
+        const r = await fetch('lectures.json?v=' + Date.now(), { cache: 'no-store' });
+        const data = await r.json();
+        const root = document.getElementById('list');
+        root.innerHTML = '';
+
+        data.lectures.forEach(L => {
+          const el = document.createElement('article');
+
+          // залоченная карточка
+          if (L.locked) {
+            el.className = 'card card-locked';
+            el.innerHTML = `
+              <h2>${L.title}</h2>
+              <div class="locked-body">
+                <p>${L.summary}</p>
+              </div>
+              <div class="locked-footer">
+                <button class="btn locked-btn" type="button" disabled>
+                  🔒 Скоро
+                </button>
+              </div>
+            `;
+          }
+          // открытая карточка
+          else {
+            el.className = 'card card-clickable';
+            // параметр from=index
+            const lectureUrlWithParam = L.url + (L.url.includes('?') ? '&' : '?') + 'from=index';
+            el.innerHTML = `
+              <h2>${L.title}</h2>
+              <p>${L.summary}</p>
+              <a class="btn" href="${lectureUrlWithParam}">Открыть</a>
+            `;
+
+            // делаем кликабельным весь квадратик (кроме самой кнопки/ссылки)
+            el.addEventListener('click', (e) => {
+              if (e.target.closest('a,button')) return;
+              if (L.url) window.location.href = lectureUrlWithParam; // измененный URL
+            });
+          }
+
+          root.appendChild(el);
+        });
+      } catch (e) {
+        document.getElementById('list').innerHTML =
+          '<p>Не удалось загрузить список. Что-то не так)))</p>';
+        console.error(e);
+      }
+    }
+
+    load();
+  </script>
+
+  <script src="theme.js" defer></script>
+</body>
+</html>
