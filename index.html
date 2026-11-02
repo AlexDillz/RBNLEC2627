@@ -1,0 +1,95 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Школа Вожатского Мастерства ОЛАС «РУБИН»</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Школа Вожатского Мастерства ОЛАС «РУБИН»</h1>
+    <p>
+      Горячий привет всем, кто добрался сюда. Здесь можно ознакомиться с материалами лекций и не только.
+    </p>
+
+    <div class="header-actions">
+      <a class="btn btn-secondary" href="lectures/personas.html">
+        👥 Команда и лекторы</a>
+      <a class="btn btn-secondary" href="contacts.html">
+        📬 Наши контакты</a>
+    </div>
+  </header>
+
+  <button id="theme-toggle" aria-label="Переключить тему">🌙 Темная тема</button>
+
+  <main id="list" class="grid"></main>
+
+  <footer><small>v62.2027 © PARFENUCHKA, 2026-2027</small></footer>
+
+  <script>
+    async function load() {
+      try {
+        const r = await fetch('lectures.json?v=' + Date.now(), { cache: 'no-store' });
+        const data = await r.json();
+        const root = document.getElementById('list');
+        root.innerHTML = '';
+
+        const lectures = Array.isArray(data.lectures) ? data.lectures : [];
+        if (lectures.length === 0) {
+          root.innerHTML = '<p class="muted">Лекции скоро появятся. Загляните сюда чуть позже 🙂</p>';
+          return;
+        }
+
+        lectures.forEach(L => {
+          const el = document.createElement('article');
+
+          // залоченная карточка
+          if (L.locked) {
+            el.className = 'card card-locked';
+            el.innerHTML = `
+              <h2>${L.title}</h2>
+              <div class="locked-body">
+                <p>${L.summary}</p>
+              </div>
+              <div class="locked-footer">
+                <button class="btn locked-btn" type="button" disabled>
+                  🔒 Скоро
+                </button>
+              </div>
+            `;
+          }
+          // открытая карточка
+          else {
+            el.className = 'card card-clickable';
+            // параметр from=index
+            const lectureUrlWithParam = L.url + (L.url.includes('?') ? '&' : '?') + 'from=index';
+            el.innerHTML = `
+              <h2>${L.title}</h2>
+              <p>${L.summary}</p>
+              <a class="btn" href="${lectureUrlWithParam}">Открыть</a>
+            `;
+
+            // делаем кликабельным весь квадратик (кроме самой кнопки/ссылки)
+            el.addEventListener('click', (e) => {
+              if (e.target.closest('a,button')) return;
+              if (L.url) window.location.href = lectureUrlWithParam; // измененный URL
+            });
+          }
+
+          root.appendChild(el);
+        });
+      } catch (e) {
+        document.getElementById('list').innerHTML =
+          '<p>Не удалось загрузить список. Что-то не так)))</p>';
+        console.error(e);
+      }
+    }
+
+    load();
+  </script>
+
+  <script src="theme.js" defer></script>
+</body>
+</html>

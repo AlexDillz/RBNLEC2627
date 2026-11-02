@@ -1,0 +1,157 @@
+<!-- personas.html -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Команда и лекторы</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js" defer></script>
+</head>
+
+<body>
+  <!-- переключатель темы -->
+  <button id="theme-toggle" aria-label="Переключить тему">🌙 Dark mode</button>
+
+  <!-- общая карточка страницы -->
+  <article class="card lecture-card">
+    <!-- крестик-назад - теперь ведет на index.html, но JS изменит это -->
+    <a class="close-card-btn" href="../index.html" aria-label="Назад на главную">
+      <svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="6" y1="18" x2="18" y2="6"></line>
+      </svg>
+    </a>
+
+    <div class="content">
+      <h1>Команда и лекторы</h1>
+      <p>
+        Здесь можно познакомиться с администрацией и организаторами Школы вожатского мастерства.
+      </p>
+
+      <!-- администрация -->
+      <h2>Администрация</h2>
+      <section class="person-grid">
+        <!-- КНН -->
+        <article class="card person-card person-card--done">
+          <img
+            class="person-photo"
+            src="../assets/personas/Nadejda_Kulikova.jpg"
+            alt="Куликова Надежда Николаевна"
+          >
+          <div class="person-main">
+            <div class="person-header-row">
+              <h3 class="person-name">Куликова Надежда Николаевна</h3>
+              <span class="person-status person-status--done">Руководитель лагеря</span>
+            </div>
+
+            <button class="person-toggle" type="button">
+              Информация
+            </button>
+
+            <div class="person-extra">
+              <p>«Лагерь «РУБИН» - это место силы, атмосфера, наполненная взаимопониманием, сотрудничеством детей и взрослых, творчеством, дружбой и любовью. За смену подростки находят ответы на свои вопросы и прокладывают личную траекторию на годы вперед»</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- МТН -->
+        <article class="card person-card person-card--done">
+          <img
+            class="person-photo"
+            src="../assets/personas/Tat'yana_Moscow.jpg"
+            alt="Московцева Татьяна Николаевна"
+          >
+          <div class="person-main">
+            <div class="person-header-row">
+              <h3 class="person-name">Московцева Татьяна Николаевна</h3>
+              <span class="person-status person-status--done">Заместитель руководителя</span>
+            </div>
+
+            <button class="person-toggle" type="button">
+              Информация
+            </button>
+
+            <div class="person-extra">
+              <p>«Главное, что подарил мне «РУБИН», - это юность! Причем не как воспоминание, а как состояние, которое возвращается ко мне каждый раз, когда я здесь. В лагере я не думаю о возрасте, он просто теряет значение. Я чувствую, что нужна, что занимаюсь важным делом. «РУБИН» стал для меня неотъемлемой частью жизни, источником вдохновения, энергии и, конечно, местом, где у меня появились настоящие, верные друзья»</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- организаторы -->
+      <h2>Организаторы</h2>
+      <section class="person-grid">
+        <!-- ГТД -->
+        <article class="card person-card person-card--done">
+          <img
+            class="person-photo"
+            src="../assets/personas/Tanya_Ganina.jpg"
+            alt="Ганина Татьяна Денисовна"
+          >
+          <div class="person-main">
+            <div class="person-header-row">
+              <h3 class="person-name">Ганина Татьяна Денисовна</h3>
+              <span class="person-status person-status--done">Комиссар</span>
+            </div>
+
+            <button class="person-toggle" type="button">
+              Информация
+            </button>
+
+            <div class="person-extra">
+              <p>РГУ им. С.А.Есенина</p>
+              <p>Комиссар «РУБИНов» 56-60</p>
+              <p>Вожатая по жизни, педагог по сути, методист для души, гитарист для вайба</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ПВА -->
+        <article class="card person-card person-card--done">
+          <img
+            class="person-photo"
+            src="../assets/personas/Victor_Parf.jpg"
+            alt="Парфенюк Виктор Андреевич"
+          >
+          <div class="person-main">
+            <div class="person-header-row">
+              <h3 class="person-name">Парфенюк Виктор Андреевич</h3>
+              <span class="person-status person-status--done">Комиссар</span>
+              <span class="person-status person-status--done">Разработчик</span>
+            </div>
+
+            <button class="person-toggle" type="button">
+              Информация
+            </button>
+
+            <div class="person-extra">
+              <p>Московский Авиационный Институт</p>
+              <p>Комиссар «РУБИНов» 57-60</p>
+              <p>МАИст, программист, гитарист</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- низ страницы -->
+      <div class="person-footer-actions">
+        <a class="btn" href="../index.html">← На главную</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- скрипт разворачивания "информация" -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.person-toggle').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.person-card');
+          const opened = card.classList.toggle('person-card--open');
+          btn.textContent = opened ? 'Скрыть информацию' : 'Информация';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
